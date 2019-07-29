@@ -1,11 +1,8 @@
-#include "ModuleDescriptor.hpp"
+#include "archlib/ModuleDescriptor.hpp"
 
 namespace arch {
 
     ModuleDescriptor::ModuleDescriptor() : name(), freq(), deadline(), wce(), connection() {}
-
-    ModuleDescriptor::ModuleDescriptor(const std::string &name, const double &freq, const uint32_t &deadline, const uint32_t wce, const bool &connection) : name(name), freq(freq), deadline(deadline), wce(wce), connection(connection) {}
-
     ModuleDescriptor::~ModuleDescriptor() {}
 
     ModuleDescriptor::ModuleDescriptor(const ModuleDescriptor &obj) : 
