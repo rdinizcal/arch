@@ -2,7 +2,7 @@
 
 namespace arch {
 
-    ModuleDescriptor::ModuleDescriptor() : name(), freq(), deadline(), wce(), connection() {}
+    ModuleDescriptor::ModuleDescriptor() : name(), freq(), deadline(), wce(), connection(), priority() {}
     ModuleDescriptor::~ModuleDescriptor() {}
 
     ModuleDescriptor::ModuleDescriptor(const ModuleDescriptor &obj) : 
@@ -10,7 +10,8 @@ namespace arch {
         freq(obj.getFreq()), 
         deadline(obj.getDeadline()), 
         wce(obj.getWorstCaseExecutionTime()), 
-        connection(obj.getConnection()) {}
+        connection(obj.getConnection()),
+        priority(obj.getPriority()) {}
 
     ModuleDescriptor& ModuleDescriptor::operator=(const ModuleDescriptor &obj) {
         this->name = obj.getName();
@@ -18,6 +19,7 @@ namespace arch {
         this->deadline = obj.getDeadline();
         this->wce = obj.getWorstCaseExecutionTime();
         this->connection = obj.getConnection();
+        this->priority = obj.getPriority();
     }
 
     void ModuleDescriptor::setName(const std::string &name) {
@@ -59,4 +61,13 @@ namespace arch {
     bool ModuleDescriptor::getConnection() const {
         return this->connection;
     }
+
+    void ModuleDescriptor::setPriority(const int  &priority) {
+        this->priority = priority;
+    }
+
+    int  ModuleDescriptor::getPriority() const {
+        return this->priority;
+    }
+
 }

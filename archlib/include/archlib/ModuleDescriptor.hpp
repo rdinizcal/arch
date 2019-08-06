@@ -28,12 +28,16 @@ namespace arch {
 			void setConnection(const bool &connection);
 			bool getConnection() const;
 
+			int getPriority() const;
+			void setPriority(const int  &priority);
+
 		private:
 			std::string name;
 			double freq;
 			uint32_t deadline;
 			uint32_t wce;
 			bool connection;
+			int priority;
 	};
 }
 
