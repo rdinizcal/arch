@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "archlib/RuntimeBehavior.hpp"
-#include "archlib/Communication.hpp"
+//#include "archlib/RuntimeBehavior.hpp"
+//#include "archlib/Communication.hpp"
 #include "archlib/ModuleDescriptor.hpp"
 
 #include "std_msgs/String.h"
@@ -12,7 +12,7 @@
 
 namespace arch {
     
-    class Module : public RuntimeBehavior, Communication {
+    class Module /*: public RuntimeBehavior, Communication*/ {
 
         public:
             Module(const Module &);
