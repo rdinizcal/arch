@@ -1,12 +1,10 @@
 #ifndef PROBE_HPP
 #define PROBE_HPP
 
-#include <fstream>
-#include <iostream>
-#include <chrono>
-
 #include "ros/ros.h"
 
+#include "archlib/Event.h"
+#include "archlib/Status.h"
 #include "archlib/ROSComponent.hpp"
 
 namespace arch {
@@ -15,7 +13,7 @@ namespace arch {
         class Probe : public ROSComponent {
 
             public:
-                Probe(int &argc, char **argv);
+                Probe(int &argc, char **argv, const std::string &name);
                 virtual ~Probe();
 
             private:
@@ -26,10 +24,9 @@ namespace arch {
                 virtual void setUp();
                 virtual void tearDown();
                 virtual int32_t run();
-                virtual void body() = 0;
 
-                void collectEvent(const messages::Event::ConstPtr& /*msg*/);
-                void collectStatus(const messages::Status::ConstPtr& /*msg*/);
+                void collectEvent(const archlib::Event::ConstPtr& /*msg*/);
+                void collectStatus(const archlib::Status::ConstPtr& /*msg*/);
 
             private:
                 ros::NodeHandle handle;

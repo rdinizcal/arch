@@ -12,7 +12,7 @@ namespace arch {
     class ROSComponent{
 
         public:
-            ROSComponent(const int32_t &argc, char **argv);
+            ROSComponent(int &argc, char **argv, const std::string &name);
 		    virtual ~ROSComponent();
 
         private:
@@ -23,7 +23,6 @@ namespace arch {
             virtual void setUp() = 0;
             virtual void tearDown() = 0;
             virtual int32_t run() = 0;
-            virtual void body() = 0;
 
         protected:
             ROSComponentDescriptor rosComponentDescriptor;    

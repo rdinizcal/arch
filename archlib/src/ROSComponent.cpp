@@ -1,9 +1,9 @@
 #include "archlib/ROSComponent.hpp"
 
 namespace arch {
-	ROSComponent::ROSComponent(const int32_t &argc, char **argv) : rosComponentDescriptor(argv[1]) {
-        if(argc < 2) throw std::invalid_argument("Could not start component. Name not specified.");
-        ros::init(argc, argv, argv[1]);
+	ROSComponent::ROSComponent(int &argc, char **argv, const std::string &name) : rosComponentDescriptor() {
+        ros::init(argc, argv, name, ros::init_options::AnonymousName);
+        rosComponentDescriptor.setName(ros::this_node::getName());
     }
 	ROSComponent::~ROSComponent() {}
 

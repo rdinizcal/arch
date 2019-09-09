@@ -5,6 +5,10 @@
 
 #include "ros/ros.h"
 
+#include "archlib/Event.h"
+#include "archlib/Status.h"
+#include "archlib/AdaptationCommand.h"
+
 #include "archlib/ROSComponent.hpp"
 
 namespace arch {
@@ -13,7 +17,7 @@ namespace arch {
         class Component : public ROSComponent {
 
             public:
-                Component(const int32_t &argc, char **argv);
+                Component(int &argc, char **argv, const std::string &name);
                 virtual ~Component();
 
             private:
@@ -26,8 +30,21 @@ namespace arch {
                 virtual int32_t run();
                 virtual void body() = 0;
 
+                void sendEvent(const std::string &/*type*/, const std::string &/*description*/);
+		        void sendStatus(const std::string &/*key*/, const double &/*value*/);
+
+                virtual void reconfigure(const archlib::AdaptationCommand::ConstPtr& msg);
+
+            protected:
+                void activate();
+                void deactivate();
+
             private:
+                bool status;
                 ros::NodeHandle handle;
+                ros::Publisher collect_event;
+                ros::Publisher collect_status;
+                ros::Subscriber effect;
         };
 
     }

@@ -2,7 +2,7 @@
 
 namespace arch {
 
-    ROSComponentDescriptor::ROSComponentDescriptor(std::string &_name) : name(name), freq() {}
+    ROSComponentDescriptor::ROSComponentDescriptor() : name(), freq() {}
     ROSComponentDescriptor::~ROSComponentDescriptor() {}
 
     ROSComponentDescriptor::ROSComponentDescriptor(const ROSComponentDescriptor &obj) : 
@@ -12,6 +12,10 @@ namespace arch {
     ROSComponentDescriptor& ROSComponentDescriptor::operator=(const ROSComponentDescriptor &obj) {
         this->name = obj.getName();
         this->freq = obj.getFreq();
+    }
+
+    void ROSComponentDescriptor::setName(const std::string &name){
+        this->name = name;
     }
 
     std::string ROSComponentDescriptor::getName() const {

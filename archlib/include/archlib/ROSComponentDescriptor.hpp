@@ -7,7 +7,7 @@ namespace arch {
 	class ROSComponentDescriptor {
 
 		public:
-			ROSComponentDescriptor(std::string &name);
+			ROSComponentDescriptor();
 			virtual ~ROSComponentDescriptor();
 
 		private:
@@ -15,6 +15,7 @@ namespace arch {
 			ROSComponentDescriptor &operator=(const ROSComponentDescriptor &);
 
 		public:
+			void setName(const std::string &name);
 			std::string getName() const;
 
 			void setFreq(const double &freq);
