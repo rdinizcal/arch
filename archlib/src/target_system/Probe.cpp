@@ -9,28 +9,26 @@ namespace arch {
         void Probe::setUp() {
             log_event = handle.advertise<archlib::Event>("log_event", 1000);
             log_status = handle.advertise<archlib::Status>("log_status", 1000);
-
-            ros::Subscriber collect_event = handle.subscribe("collect_event", 1000, &Probe::collectEvent, this);
-            ros::Subscriber collect_status = handle.subscribe("collect_status", 1000, &Probe::collectStatus, this);
         }
 
         void Probe::tearDown() {
         }
 
         void Probe::collectEvent(const archlib::Event::ConstPtr& msg) {
+            ROS_INFO("I heard: [%s: %s]", msg->source.c_str(), msg->content.c_str());
             log_event.publish(msg);
         }
 
         void Probe::collectStatus(const archlib::Status::ConstPtr& msg) {
+            ROS_INFO("I heard: [%s: %s]", msg->source.c_str(), msg->content.c_str());
             log_status.publish(msg);
         }
 
-		int32_t Probe::run() {
-			setUp();    
-            ros::spin();			
-			tearDown();
-
-            return 0;
-		}
+        void Probe::body(){
+            ros::NodeHandle n;
+            ros::Subscriber collect_event = n.subscribe("collect_event", 1000, &Probe::collectEvent, this);
+            ros::Subscriber collect_status = n.subscribe("collect_status", 1000, &Probe::collectStatus, this);
+            ros::spin();
+        }
 	}
 }

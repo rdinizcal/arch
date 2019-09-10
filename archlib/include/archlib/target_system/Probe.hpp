@@ -23,13 +23,15 @@ namespace arch {
             public:
                 virtual void setUp();
                 virtual void tearDown();
-                virtual int32_t run();
+                virtual void body();
 
                 void collectEvent(const archlib::Event::ConstPtr& /*msg*/);
                 void collectStatus(const archlib::Status::ConstPtr& /*msg*/);
 
-            private:
+            protected:
                 ros::NodeHandle handle;
+
+            private:
                 ros::Subscriber collect_event;
                 ros::Subscriber collect_status;
                 ros::Publisher log_event;

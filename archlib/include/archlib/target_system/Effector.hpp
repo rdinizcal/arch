@@ -22,9 +22,11 @@ namespace arch {
             public:
                 virtual void setUp();
                 virtual void tearDown();
-                virtual int32_t run();
 
                 virtual void receiveAdaptationCommand(const archlib::AdaptationCommand::ConstPtr& msg) = 0;
+
+            protected:
+                ros::NodeHandle handle;
         };
 
     }

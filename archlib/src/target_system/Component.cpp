@@ -19,46 +19,48 @@ namespace arch {
 		void Component::tearDown() {
 		}
 
-		int Component::run() {
+		int32_t Component::run() {
 
 			Component::setUp();
 			setUp();
+			sendStatus("init");
 
 			while(!ros::isShuttingDown()) {
 				ros::Rate loop_rate(rosComponentDescriptor.getFreq());
 				ros::spinOnce();
 
+				sendStatus("running");
 				try{
 					body();
+					sendStatus("success");
 				} catch (const std::exception& e) {
-					sendEvent(e.what(), "failure");
-				}
+					sendStatus("fail");
+				} 
 				loop_rate.sleep();
 			}
 			
+			sendStatus("finish");
 			tearDown();
 			Component::tearDown();
 
 			return 0;
 		}
 
-		void Component::sendEvent(const std::string &type, const std::string &description) {
+		void Component::sendEvent(const std::string &content) {
 			archlib::Event msg;
 
 			msg.source = rosComponentDescriptor.getName();
-			msg.type = type;
-			msg.description = description;
+			msg.content = content;
 
 			collect_event = handle.advertise<archlib::Event>("collect_event", 10);
 			collect_event.publish(msg);
 		}
 
-		void Component::sendStatus(const std::string &id, const double &value) {
+		void Component::sendStatus(const std::string &content) {
 			archlib::Status msg;
 
 			msg.source = rosComponentDescriptor.getName();
-			msg.key = id;
-			msg.value = value;
+			msg.content = content;
 
 			collect_status = handle.advertise<archlib::Status>("collect_status", 10);
 			collect_status.publish(msg);
@@ -69,10 +71,12 @@ namespace arch {
 		}
 
 		void Component::activate() {
+			sendEvent("activate");
 			status = true;
 		}
 
         void Component::deactivate() {
+			sendEvent("deactivate");
 			status = false;
 		}
 	}

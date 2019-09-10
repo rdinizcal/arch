@@ -30,8 +30,8 @@ namespace arch {
                 virtual int32_t run();
                 virtual void body() = 0;
 
-                void sendEvent(const std::string &/*type*/, const std::string &/*description*/);
-		        void sendStatus(const std::string &/*key*/, const double &/*value*/);
+                void sendEvent(const std::string &content);
+		        void sendStatus(const std::string &content);
 
                 virtual void reconfigure(const archlib::AdaptationCommand::ConstPtr& msg);
 
@@ -39,9 +39,11 @@ namespace arch {
                 void activate();
                 void deactivate();
 
+            protected:
+                ros::NodeHandle handle;
+
             private:
                 bool status;
-                ros::NodeHandle handle;
                 ros::Publisher collect_event;
                 ros::Publisher collect_status;
                 ros::Subscriber effect;

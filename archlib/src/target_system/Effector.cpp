@@ -8,13 +8,5 @@ namespace arch {
 
         void Effector::setUp() {}
         void Effector::tearDown() {}
-
-    	int32_t Effector::run() {
-			setUp();    
-            ros::spin();			
-			tearDown();
-
-            return 0;
-		}
 	}
 }

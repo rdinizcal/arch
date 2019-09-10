@@ -2,7 +2,7 @@
 
 namespace arch {
 
-    ROSComponentDescriptor::ROSComponentDescriptor() : name(), freq() {}
+    ROSComponentDescriptor::ROSComponentDescriptor() : name(), freq(1) {}
     ROSComponentDescriptor::~ROSComponentDescriptor() {}
 
     ROSComponentDescriptor::ROSComponentDescriptor(const ROSComponentDescriptor &obj) : 

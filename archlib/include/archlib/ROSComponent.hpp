@@ -6,6 +6,8 @@
 
 #include "ros/ros.h"
 
+#include "archlib/Event.h"
+#include "archlib/Status.h"
 #include "archlib/ROSComponentDescriptor.hpp"
 
 namespace arch {
@@ -22,7 +24,8 @@ namespace arch {
         public:
             virtual void setUp() = 0;
             virtual void tearDown() = 0;
-            virtual int32_t run() = 0;
+            virtual int32_t run();
+            virtual void body() = 0;
 
         protected:
             ROSComponentDescriptor rosComponentDescriptor;    

@@ -12,6 +12,7 @@ ADD_MESSAGE_FILES( FILES
   application/external/Status.msg
   application/external/Event.msg
   manager/external/AdaptationCommand.msg
+  repository/external/Persist.msg
 )
 
 GENERATE_MESSAGES(DEPENDENCIES std_msgs)
