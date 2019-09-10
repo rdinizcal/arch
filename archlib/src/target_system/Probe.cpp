@@ -9,6 +9,10 @@ namespace arch {
         void Probe::setUp() {
             log_event = handle.advertise<archlib::Event>("log_event", 1000);
             log_status = handle.advertise<archlib::Status>("log_status", 1000);
+
+            double freq;
+	        handle.getParam("frequency", freq);
+	        rosComponentDescriptor.setFreq(freq);
         }
 
         void Probe::tearDown() {
