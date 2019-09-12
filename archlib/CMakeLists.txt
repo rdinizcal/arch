@@ -13,6 +13,7 @@ ADD_MESSAGE_FILES( FILES
   application/external/Event.msg
   manager/external/AdaptationCommand.msg
   repository/external/Persist.msg
+  simulation/external/Uncertainty.msg
 )
 
 GENERATE_MESSAGES(DEPENDENCIES std_msgs)
