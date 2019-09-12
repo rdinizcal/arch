@@ -11,12 +11,13 @@ namespace arch {
 			handle.getParam("frequency", freq);
 			rosComponentDescriptor.setFreq(freq);
 
-			effect = handle.subscribe("effect_" + rosComponentDescriptor.getName(), 1, &Component::reconfigure, this);
+			//effect = handle.subscribe("effect_" + rosComponentDescriptor.getName(), 1, &Component::reconfigure, this);
 
 			activate();
 		}
 
 		void Component::tearDown() {
+			deactivate();
 		}
 
 		int32_t Component::run() {
