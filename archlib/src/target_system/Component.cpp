@@ -11,7 +11,11 @@ namespace arch {
 			handle.getParam("frequency", freq);
 			rosComponentDescriptor.setFreq(freq);
 
-			//effect = handle.subscribe("effect_" + rosComponentDescriptor.getName(), 1, &Component::reconfigure, this);
+			collect_event = handle.advertise<archlib::Event>("collect_event", 10);
+			while(collect_event.getNumSubscribers() < 1) {} // to cope with the delay on opening the connection
+
+			collect_status = handle.advertise<archlib::Status>("collect_status", 10);
+			while(collect_status.getNumSubscribers() < 1) {}
 
 			activate();
 		}
@@ -53,7 +57,6 @@ namespace arch {
 			msg.source = rosComponentDescriptor.getName();
 			msg.content = content;
 
-			collect_event = handle.advertise<archlib::Event>("collect_event", 10);
 			collect_event.publish(msg);
 		}
 
@@ -63,7 +66,6 @@ namespace arch {
 			msg.source = rosComponentDescriptor.getName();
 			msg.content = content;
 
-			collect_status = handle.advertise<archlib::Status>("collect_status", 10);
 			collect_status.publish(msg);
 		}
 
