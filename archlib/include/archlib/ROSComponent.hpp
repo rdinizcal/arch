@@ -6,8 +6,6 @@
 
 #include "ros/ros.h"
 
-#include "archlib/Event.h"
-#include "archlib/Status.h"
 #include "archlib/ROSComponentDescriptor.hpp"
 
 namespace arch {

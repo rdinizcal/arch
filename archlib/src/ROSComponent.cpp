@@ -2,7 +2,7 @@
 
 namespace arch {
 	ROSComponent::ROSComponent(int &argc, char **argv, const std::string &name) : rosComponentDescriptor() {
-        ros::init(argc, argv, name, ros::init_options::AnonymousName); //Configure node name and sets commnd line arguments
+        ros::init(argc, argv, name, ros::init_options::NoSigintHandler); //Configure node name and sets commnd line arguments
         rosComponentDescriptor.setName(ros::this_node::getName());
     }
 	ROSComponent::~ROSComponent() {}
@@ -18,7 +18,6 @@ namespace arch {
         }
 
         tearDown();
-        
         return 0;
     }
 }

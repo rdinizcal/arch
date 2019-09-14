@@ -17,20 +17,46 @@ namespace arch {
 			collect_status = handle.advertise<archlib::Status>("collect_status", 10);
 			while(collect_status.getNumSubscribers() < 1) {}
 
+			sendStatus("init");
 			activate();
+
+			signal(SIGINT, sigIntHandler);
 		}
 
 		void Component::tearDown() {
+			/* sigIntHandler is making the job of the tearDown
+			sendStatus("finish");
 			deactivate();
+			*/
+		}
+
+		void Component::sigIntHandler(int signal){
+			archlib::Event eventMsg;
+			archlib::Status statusMsg;
+
+			eventMsg.source = ros::this_node::getName();
+			eventMsg.content = "deactivate";
+
+			statusMsg.source = ros::this_node::getName();
+			statusMsg.content = "status";
+
+			ros::NodeHandle nh;
+
+			ros::Publisher last_event = nh.advertise<archlib::Event>("collect_event", 10);
+			while(last_event.getNumSubscribers() < 1) {} // to cope with the delay on opening the connection
+			last_event.publish(eventMsg);
+
+			ros::Publisher last_status = nh.advertise<archlib::Status>("collect_status", 10);
+			while(last_status.getNumSubscribers() < 1) {}
+			last_status.publish(statusMsg);
+
+			ros::shutdown();
 		}
 
 		int32_t Component::run() {
-
-			Component::setUp();
 			setUp();
-			sendStatus("init");
 
-			while(!ros::isShuttingDown()) {
+			while(ros::ok()) {
 				ros::Rate loop_rate(rosComponentDescriptor.getFreq());
 				ros::spinOnce();
 
@@ -44,10 +70,7 @@ namespace arch {
 				loop_rate.sleep();
 			}
 			
-			sendStatus("finish");
 			tearDown();
-			Component::tearDown();
-
 			return 0;
 		}
 

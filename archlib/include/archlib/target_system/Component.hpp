@@ -2,6 +2,7 @@
 #define COMPONENT_HPP
 
 #include <string>
+#include <signal.h>
 
 #include "ros/ros.h"
 
@@ -24,6 +25,7 @@ namespace arch {
                 Component(const Component &);
                 Component &operator=(const Component &);
 
+
             public:
                 virtual void setUp();
                 virtual void tearDown();
@@ -39,8 +41,8 @@ namespace arch {
                 void activate();
                 void deactivate();
 
-            protected:
                 ros::NodeHandle handle;
+                static void sigIntHandler(int signal);
 
             private:
                 bool status;
