@@ -9,6 +9,7 @@
 #include "archlib/Event.h"
 #include "archlib/Status.h"
 #include "archlib/AdaptationCommand.h"
+#include "archlib/EffectorRegister.h"
 
 #include "archlib/ROSComponent.hpp"
 
@@ -24,7 +25,6 @@ namespace arch {
             private:
                 Component(const Component &);
                 Component &operator=(const Component &);
-
 
             public:
                 virtual void setUp();

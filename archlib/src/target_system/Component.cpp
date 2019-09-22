@@ -21,6 +21,23 @@ namespace arch {
 			activate();
 
 			signal(SIGINT, sigIntHandler);
+
+			// register in effector
+			ros::NodeHandle client_handler;
+            ros::ServiceClient client_module;
+
+			client_module = client_handler.serviceClient<archlib::EffectorRegister>("EffectorRegister");
+
+			archlib::EffectorRegister srv;
+			srv.request.name = ros::this_node::getName();
+			srv.request.connection = true;
+
+			if(client_module.call(srv)) {
+				ROS_INFO("Succesfully connected to effector.");
+			} else {
+				ROS_ERROR("Failed to connect to effector.");
+			}
+			
 		}
 
 		void Component::tearDown() {
@@ -50,6 +67,23 @@ namespace arch {
 			while(last_status.getNumSubscribers() < 1) {}
 			last_status.publish(statusMsg);
 
+			// Unregister from effector
+			archlib::EffectorRegister srv;
+			srv.request.name = ros::this_node::getName();
+			srv.request.connection = false;
+
+			ros::NodeHandle client_handler;
+            ros::ServiceClient client_module;
+
+			//Connection to scheduler module management service
+			client_module = client_handler.serviceClient<archlib::EffectorRegister>("EffectorRegister");
+
+			if(client_module.call(srv)) {
+				ROS_INFO("Succesfully disconnected from effector.");
+			} else {
+				ROS_ERROR("Failed to disconnect from effector.");
+			}
+		
 			ros::shutdown();
 		}
 

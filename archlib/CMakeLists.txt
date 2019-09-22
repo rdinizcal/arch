@@ -16,6 +16,10 @@ ADD_MESSAGE_FILES( FILES
   simulation/external/Uncertainty.msg
 )
 
+ADD_SERVICE_FILES( FILES
+  application/internal/EffectorRegister.srv
+)
+
 GENERATE_MESSAGES(DEPENDENCIES std_msgs)
 
 ###########################################################################
@@ -38,6 +42,7 @@ INCLUDE_DIRECTORIES(include)
 FILE(GLOB_RECURSE ${PROJECT_NAME}-src "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 ADD_LIBRARY(${PROJECT_NAME} ${${PROJECT_NAME}-src})
 TARGET_LINK_LIBRARIES (${PROJECT_NAME} ${catkin_LIBRARIES} ${LIBRARIES}) 
+ADD_DEPENDENCIES(${PROJECT_NAME} services_generate_messages_cpp)
 
 ###########################################################################
 # Install this project.
