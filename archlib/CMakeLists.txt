@@ -9,15 +9,15 @@ FIND_PACKAGE(catkin REQUIRED COMPONENTS roscpp std_msgs genmsg messages message_
 ###########################################################################
 # Set message generation.
 ADD_MESSAGE_FILES( FILES
-  application/external/Status.msg
-  application/external/Event.msg
-  manager/external/AdaptationCommand.msg
-  repository/external/Persist.msg
+  target_system/external/Status.msg
+  target_system/external/Event.msg
+  system_manager/external/AdaptationCommand.msg
+  knowledge_repository/external/Persist.msg
   simulation/external/Uncertainty.msg
 )
 
 ADD_SERVICE_FILES( FILES
-  application/internal/EffectorRegister.srv
+  target_system/internal/EffectorRegister.srv
 )
 
 GENERATE_MESSAGES(DEPENDENCIES std_msgs)
@@ -42,7 +42,7 @@ INCLUDE_DIRECTORIES(include)
 FILE(GLOB_RECURSE ${PROJECT_NAME}-src "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 ADD_LIBRARY(${PROJECT_NAME} ${${PROJECT_NAME}-src})
 TARGET_LINK_LIBRARIES (${PROJECT_NAME} ${catkin_LIBRARIES} ${LIBRARIES}) 
-ADD_DEPENDENCIES(${PROJECT_NAME} services_generate_messages_cpp)
+ADD_DEPENDENCIES(${PROJECT_NAME} messages_generate_messages_cpp services_generate_messages_cpp)
 
 ###########################################################################
 # Install this project.
