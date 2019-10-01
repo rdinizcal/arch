@@ -12,11 +12,14 @@ ADD_MESSAGE_FILES( FILES
   target_system/external/Status.msg
   target_system/external/Event.msg
   system_manager/external/AdaptationCommand.msg
+  system_manager/internal/Strategy.msg
+  system_manager/internal/Exception.msg
   knowledge_repository/external/Persist.msg
   simulation/external/Uncertainty.msg
 )
 
 ADD_SERVICE_FILES( FILES
+  knowledge_repository/external/DataAccessRequest.srv
   target_system/internal/EffectorRegister.srv
 )
 
