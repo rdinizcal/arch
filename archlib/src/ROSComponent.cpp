@@ -21,4 +21,15 @@ namespace arch {
         tearDown();
         return 0;
     }
+
+    std::string ROSComponent::getRosNodeName(const std::string& node_name, const std::string& node_namespace) {
+        std::string ros_node_name = node_name;
+
+        // std::cout << ros_node_name << std::endl;
+        // ROS_INFO("%s", ros_node_name.c_str());
+        size_t pos = ros_node_name.find(node_namespace);
+        ros_node_name.replace(pos, node_namespace.length(), "");
+
+        return ros_node_name;
+    }
 }
