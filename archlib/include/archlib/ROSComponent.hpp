@@ -27,6 +27,8 @@ namespace arch {
 
         protected:
             ROSComponentDescriptor rosComponentDescriptor;    
+
+            static std::string getRosNodeName(const std::string& node_name, const std::string& node_namespace);
     };
 }
 

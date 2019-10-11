@@ -29,7 +29,8 @@ namespace arch {
 			client_module = client_handler.serviceClient<archlib::EffectorRegister>("EffectorRegister");
 
 			archlib::EffectorRegister srv;
-			srv.request.name = ros::this_node::getName();
+
+			srv.request.name = getRosNodeName(ros::this_node::getName(), ros::this_node::getNamespace());
 			srv.request.connection = true;
 
 			if(client_module.call(srv)) {
@@ -51,10 +52,10 @@ namespace arch {
 			archlib::Event eventMsg;
 			archlib::Status statusMsg;
 
-			eventMsg.source = ros::this_node::getName();
+			eventMsg.source = getRosNodeName(ros::this_node::getName(), ros::this_node::getNamespace());
 			eventMsg.content = "deactivate";
 
-			statusMsg.source = ros::this_node::getName();
+			statusMsg.source = getRosNodeName(ros::this_node::getName(), ros::this_node::getNamespace());
 			statusMsg.content = "status";
 
 			ros::NodeHandle nh;
@@ -69,7 +70,7 @@ namespace arch {
 
 			// Unregister from effector
 			archlib::EffectorRegister srv;
-			srv.request.name = ros::this_node::getName();
+			srv.request.name = getRosNodeName(ros::this_node::getName(), ros::this_node::getNamespace());
 			srv.request.connection = false;
 
 			ros::NodeHandle client_handler;
