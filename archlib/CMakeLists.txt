@@ -4,7 +4,7 @@ PROJECT(archlib)
 add_compile_options(-std=c++11 -g)
 
 ## Find catkin and any catkin packages
-FIND_PACKAGE(catkin REQUIRED COMPONENTS roscpp std_msgs genmsg messages message_generation)
+FIND_PACKAGE(catkin REQUIRED COMPONENTS roscpp std_msgs genmsg message_generation)
 
 ###########################################################################
 # Set message generation.
@@ -30,7 +30,7 @@ GENERATE_MESSAGES(DEPENDENCIES std_msgs)
 CATKIN_PACKAGE(
     INCLUDE_DIRS include
     LIBRARIES ${PROJECT_NAME}
-    CATKIN_DEPENDS std_msgs messages message_runtime
+    CATKIN_DEPENDS std_msgs message_runtime
 )
 
 ###########################################################################
