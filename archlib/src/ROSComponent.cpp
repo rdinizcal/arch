@@ -32,12 +32,12 @@ namespace arch {
         if (pos == std::string::npos)
         {
             pos = ros_node_name.find(node_namespace);
-            ros_node_name.replace(pos, node_namespace.length(), "");
+            ros_node_name.replace(pos, node_namespace.length(), "/");
             return ros_node_name;
         }
 
         // ROS_INFO("namespace %s", node_namespace.c_str());
-        ros_node_name.replace(pos, node_namespace.length() + 1, "");
+        ros_node_name.replace(pos, node_namespace.length() + 1, "/");
 
         return ros_node_name;
     }
