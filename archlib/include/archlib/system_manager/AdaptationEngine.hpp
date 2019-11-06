@@ -1,11 +1,7 @@
 #ifndef ADAPTATION_ENGINE_HPP
 #define ADAPTATION_ENGINE_HPP
 
-#include "ros/ros.h"
-#include "ros/package.h"
-
 #include "archlib/ROSComponent.hpp"
-#include "archlib/DataAccessRequest.h"
 #include "archlib/Strategy.h"
 #include "archlib/Exception.h"
 
