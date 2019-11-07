@@ -1,8 +1,8 @@
 #include "archlib/system_manager/AdaptationEngine.hpp"
 
-namespace arch {
+namespace archlib {
     namespace system_manager {
-        AdaptationEngine::AdaptationEngine(int  &argc, char **argv, std::string name): 
+        AdaptationEngine::AdaptationEngine(int  &argc, char **argv, const std::string &name): 
             ROSComponent(argc, argv, name)
             {}
 

@@ -8,12 +8,12 @@
  /*		Adaptation engines must contain at least one type of target system representation,  *
 	*		be it a parametric formula or not																										*/
 
-namespace arch {
+namespace archlib {
 	namespace system_manager {
 		class AdaptationEngine : public arch::ROSComponent {
 			
 			public: 
-				AdaptationEngine(int &argc, char **argv, std::string name);
+				AdaptationEngine(int &argc, char **argv, const std::string &name);
 				virtual ~AdaptationEngine();
 
 			public:

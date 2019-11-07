@@ -1,21 +1,26 @@
-#include "enactor/Enactor.hpp"
+#include "archlib/system_manager/StrategyEnactor.hpp"
 
-StategyEnactor::StategyEnactor(int  &argc, char **argv, std::string name): 
-    ROSComponent(argc, argv, name), 
-    {}
+namespace archlib {
+    namespace system_manager {
+        StrategyEnactor::StrategyEnactor(int  &argc, char **argv, const std::string &name): 
+            ROSComponent(argc, argv, name)
+            {}
 
-StategyEnactor::~StategyEnactor() {}
+        StrategyEnactor::~StrategyEnactor() {}
 
-void Enactor::setUp() {}
+        void StrategyEnactor::setUp() {}
+        
+        void StrategyEnactor::body() {}
 
-void StategyEnactor::tearDown() {}
+        void StrategyEnactor::tearDown() {}
 
-void StategyEnactor::receiveEvent(const archlib::Event::ConstPtr& msg) {}
+        void StrategyEnactor::receiveEvent(const archlib::Event::ConstPtr& msg) {}
 
-void StategyEnactor::receiveStatus(const archlib::Status::ConstPtr& msg) {}
+        void StrategyEnactor::receiveStatus(const archlib::Status::ConstPtr& msg) {}
 
-void StategyEnactor::receiveStrategy(const archlib::Strategy::ConstPtr& msg) {}
+        void StrategyEnactor::receiveStrategy(const archlib::Strategy::ConstPtr& msg) {}
 
-void StategyEnactor::apply_strategy(const std::string &component) {}
+        void StrategyEnactor::apply_strategy(const std::string &component) {}
 
-void StategyEnactor::body() {}
+    }
+}

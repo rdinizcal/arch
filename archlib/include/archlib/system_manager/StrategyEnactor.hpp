@@ -7,14 +7,14 @@
 
 #include "archlib/ROSComponent.hpp"
 
-namespace arch {
+namespace archlib {
     namespace system_manager {
         class StrategyEnactor : public arch::ROSComponent {
-
             public:
-                StrategyEnactor(int &argc, char **argv, std::string name);
+                StrategyEnactor(int &argc, char **argv, const std::string &name);
                 virtual ~StrategyEnactor();
 
+            public:
                 virtual void setUp();
                 virtual void tearDown();
                 virtual void body();
